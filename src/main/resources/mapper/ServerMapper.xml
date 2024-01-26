@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.aisys.mapper.ServerMapper">
+    <!--
+    create table server (
+    id int not null auto_increment,
+    name varchar(255) null,
+    ip varchar(255) not null,
+    port int not null,
+    password varchar(255) not null,
+    user_id int not null,
+    PRIMARY KEY(id)
+    ) ENGINE=InnoDB;
+    -->
+    <resultMap id="BaseResultMap" type="com.aisys.entity.Server">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="ip" property="ip" jdbcType="VARCHAR"/>
+        <result column="port" property="port" jdbcType="INTEGER"/>
+        <result column="password" property="password" jdbcType="VARCHAR"/>
+        <result column="user_id" property="userId" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <sql id="tb">server</sql>
+    <sql id="tb_default">default_server</sql>
+
+    <sql id="Base_Column_List">
+    id, name, ip, port, password, user_id
+  </sql>
+
+    <select id="getServerById" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from <include refid="tb"/>
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+
+    <select id="getDefaultServerByUserId" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from <include refid="tb"/>
+        where id in
+        (select server_id from <include refid="tb_default" /> where user_id = #{userId,jdbcType=INTEGER} )
+    </select>
+
+    <delete id="deleteById" parameterType="java.lang.Integer">
+        delete from
+        <include refid="tb"/>
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+
+    <insert id="insert" parameterType="com.aisys.entity.Server" useGeneratedKeys="true" keyProperty="id">
+        insert into
+        <include refid="tb"/>
+        (name,ip,port,password,user_id)
+        values ( #{name,jdbcType=VARCHAR}, #{ip,jdbcType=VARCHAR},
+        #{port,jdbcType=INTEGER}, #{password,jdbcType=VARCHAR}, #{userId,jdbcType=INTEGER})
+    </insert>
+
+    <insert id="insertDefault" parameterType="com.aisys.entity.Server" >
+        insert into
+        <include refid="tb_default"></include>
+        (user_id,server_id) values( #{userId, jdbcType=INTEGER}, #{id, jdbcType=INTEGER})
+    </insert>
+
+    <update id="update" parameterType="com.aisys.entity.Server">
+        update
+        <include refid="tb"/>
+        <set>
+            <if test="name != null">name = #{name,jdbcType=VARCHAR},</if>
+            <if test="ip != null">ip = #{ip,jdbcType=VARCHAR},</if>
+            <if test="port != null">port = #{port,jdbcType=INTEGER},</if>
+            <if test="password != null">password = #{password,jdbcType=VARCHAR},</if>
+            <if test="userId != null">user_id = #{userId,jdbcType=VARCHAR},</if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+
+    <update id="setDefaultServer" parameterType="com.aisys.entity.Server">
+        update
+        <include refid="tb_default"/>
+        <set>
+            <if test="id != null">server_id= #{id,jdbcType=INTEGER},</if>
+            <if test="userId != null">user_id = #{userId,jdbcType=INTEGER},</if>
+        </set>
+        where user_id = #{userId,jdbcType=INTEGER}
+    </update>
+
+    <!--Server列表查询-->
+    <select id="listServer" parameterType="com.aisys.entity.Server"
+            resultType="com.aisys.entity.Server">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM
+        <include refid="tb"/>
+        ORDER BY `id` ASC
+    </select>
+
+    <select id="listServerByUserId" parameterType="Integer"
+            resultType="com.aisys.entity.Server">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM
+        <include refid="tb"/>
+        <where>
+            user_id=#{userId}
+        </where>
+        ORDER BY `id` ASC
+    </select>
+
+    <!--根据name或ip获得Server-->
+    <select id="getServerByNameOrIp" parameterType="String" resultType="com.aisys.entity.Server">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM
+        <include refid="tb"/>
+        <where>
+            name=#{value} OR ip=#{value}
+        </where>
+        limit 1
+    </select>
+
+    <!--根据name查Server-->
+    <select id="getServerByName" parameterType="String" resultType="com.aisys.entity.Server">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM
+        <include refid="tb"/>
+        <where>
+            name=#{value}
+        </where>
+        limit 1
+    </select>
+
+    <!--根据IP查Server-->
+    <select id="getServerByIp" parameterType="String" resultType="com.aisys.entity.Server">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM
+        <include refid="tb"/>
+        <where>
+            ip=#{value}
+        </where>
+        limit 1
+    </select>
+
+
+</mapper>
