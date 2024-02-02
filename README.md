@@ -4,14 +4,14 @@
 JAVA作为后端编程语言，采用Spring+SpringMVC+Mybatis的框架，Mysql作为数据库，
 基于web平台用AI生成图片并展示，同时web可以管理服务器，远程执行shell、查看服务器运行状态等。
 
-项目技术：
+# 项目技术：
 
 1. 后端基于SSM框架的Web开发，Spring+SpringMVC+Mybatis
 2. 前端基于jQuery框架，CSS、javascript、html编写。
 3. java Mybatis对Mysql的增删改查
 4. Python脚本编写
 
-使用说明：
+# 使用说明：
 
 需要提前导入db_structure.sql，然后在user表中插入用户名，密码，才能登陆。admin账号需要设置user_role=admin
 
