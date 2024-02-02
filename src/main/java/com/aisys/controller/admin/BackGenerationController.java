@@ -147,7 +147,7 @@ public class BackGenerationController {
         System.out.println("output dir: "+randomDirName);
         List<String> shellOutputList = shell.getStandardOutput();
         String srcServer="";
-        String command="scp -P 3004 root@" + srcIP +":";
+        String command="scp -P port  root@" + srcIP +":";
         String srcDir=srcUserDir+"/project/earthquakes/stable-diffusion/out/txt2img-samples/"+randomDirName;
         String command2=srcDir+"/samples/*.jpg ";
         if(realRootPath=="") realRootPath= request.getServletContext().getRealPath("/");
@@ -228,7 +228,7 @@ public class BackGenerationController {
         System.out.println("output dir: "+randomDirName);
         List<String> shellOutputList = shell.getStandardOutput();
 
-        String command="scp -P 3004 root@"+srcIP+":";
+        String command="scp -P port  root@"+srcIP+":";
         String srcDir=srcUserDir+"/project/earthquakes/stable-diffusion-v2/out/txt2img-samples/"+randomDirName;
         String command2=srcDir +"/samples/*.jpg ";
         if(realRootPath=="") realRootPath= request.getServletContext().getRealPath("/");
@@ -312,7 +312,7 @@ public class BackGenerationController {
         System.out.println("output dir: "+randomDirName);
         List<String> shellOutputList = shell.getStandardOutput();
 
-        String command="scp -P 3004 root@"+srcIP+":";
+        String command="scp -P port  root@"+srcIP+":";
         String srcDir=srcUserDir+"/project/earthquakes" +
                 "/projected-gan/out/00006-fastgan_lite-less1024_all_noman-batch4-best/"
                 +randomDirName;
@@ -389,7 +389,7 @@ public class BackGenerationController {
         System.out.println("output dir: "+randomDirName);
         List<String> shellOutputList = shell.getStandardOutput();
 
-        String command="scp -P 3004 root@"+srcIP+":";
+        String command="scp -P port  root@"+srcIP+":";
         String srcDir=srcUserDir+"/project/earthquakes/projected-gan-upblock-dsc/out/00002-fastgan_lite-less1024_all_noman-gpus1-batch4/"
                 +randomDirName;
         String command2=srcDir +"/*.jpg ";
