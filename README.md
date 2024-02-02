@@ -12,5 +12,6 @@ JAVA作为后端编程语言，采用Spring+SpringMVC+Mybatis的框架，Mysql�
 4. Python脚本编写
 
 使用说明：
+
 需要提前导入db_structure.sql，然后在user表中插入用户名，密码，才能登陆。admin账号需要设置user_role=admin
 
