@@ -42,8 +42,8 @@ public class BackGenerationController {
 
     private String realRootPath="";
     
-    private static final String srcIP="www.gjjshiyanzu.top";  // www.example.com
-    private static final String srcUserDir="/home/jack";  // /home/user
+    private static final String srcIP="";  // www.example.com
+    private static final String srcUserDir="";  // /home/user
 
     private JschUtil getDefaultServerShell(HttpSession session)  {
         User user = (User) session.getAttribute("user");
