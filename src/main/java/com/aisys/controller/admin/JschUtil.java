@@ -21,7 +21,7 @@ public class JschUtil {
     //等待返回时间
     private int delayTime;
     //设置ssh连接的远程端口
-    public static final int DEFAULT_SSH_PORT = 3004;
+    public static final int DEFAULT_SSH_PORT = 22;
     //保存输出内容的容器
     private ArrayList<String> stdout;
 
@@ -235,13 +235,4 @@ public class JschUtil {
                 '}';
     }
 
-    public static void main(final String [] args) throws JSchException {
-        JschUtil shell = new JschUtil("a40server.com", "root", "password");
-        shell.execute("uname -s -r -v");
-        shell.printOutput();
-
-        shell.execute("nvidia-smi");
-        shell.printOutput();
-
-    }
 }

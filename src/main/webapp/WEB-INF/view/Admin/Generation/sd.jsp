@@ -38,7 +38,6 @@
 <%--        seed: 结束<input id="seeds-end" type="text" name="seeds-end" value="" placeholder="" >--%>
 <%--        trunc: <input id="trunc" type="text" name="trunc" value="" placeholder="" >--%>
         <input id="cmdInput" type="text" name="cmd" value="" placeholder="" >
-<%--        --network=/home/sda/.jack/project/earthquakes/projected-gan/training-runs/00006-fastgan_lite-google_earthquakes_all_512-gpus1-batch8/network-snapshot.pkl--%>
 
         <button id="submit-btn">生成图片</button>
     </form>
